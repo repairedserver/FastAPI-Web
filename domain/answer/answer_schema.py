@@ -1,5 +1,6 @@
-from pydantic import BaseModel, validator
 import datetime
+
+from pydantic import BaseModel, validator
 
 
 class AnswerCreate(BaseModel):
