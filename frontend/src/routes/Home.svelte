@@ -20,7 +20,7 @@
         })
     }
 
-    get_question_list($page)
+    $: get_question_list($page)
 </script>
 
 <div class="container my-3">
