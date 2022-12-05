@@ -21,7 +21,11 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 {#if $is_login }
                     <li class="nav-item">
-                        <a use:link href="/user-login" class="nav-link">로그아웃 ({$username})</a>
+                        <a use:link href="/user-login" class="nav-link" on:click={() => {
+                            $access_token = ''
+                            $username = ''
+                            $is_login = false
+                        }}>로그아웃 ({$username})</a>
                     </li>
                 {:else}
                     <li class="nav-item">
