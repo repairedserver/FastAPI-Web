@@ -19,6 +19,8 @@ class Question(Base):
     subject = Column(String, nullable=False)
     content = Column(Text, nullable=False)
     create_date = Column(DateTime, nullable=False)
+    user_id = Column(Integer, ForeignKey("user.id"), nullable=True)
+    user = relationship("User", backref="question_users")
 
 
 class Answer(Base):
