@@ -20,7 +20,7 @@ class Question(Base):
     content = Column(Text, nullable=False)
     create_date = Column(DateTime, nullable=False)
     user_id = Column(Integer, ForeignKey("user.id"), nullable=True)
-    user = relationship("User", backref="question_users")
+    user = relationship("User", backref="answer_users")
 
 
 class Answer(Base):
