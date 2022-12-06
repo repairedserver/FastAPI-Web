@@ -4,8 +4,8 @@ from sqlalchemy.orm import Session
 from starlette import status
 from datetime import timedelta, datetime
 
-from fastapi.security import OAuth2PasswordRequestForm
-from jose import jwt
+from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
+from jose import jwt, JWTError
 from database import get_db
 from domain.user import user_crud, user_schema
 from domain.user.user_crud import pwd_context
@@ -13,6 +13,7 @@ from domain.user.user_crud import pwd_context
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
 SECRET_KEY = "4ab2fce7a6bd79e1c014396315ed322dd6edb1c5d975c6b74a2904135172c03c"
 ALGORITHM = "HS256"
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/user/login")
 
 router = APIRouter(
     prefix="/api/user",
