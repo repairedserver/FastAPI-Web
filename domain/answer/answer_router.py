@@ -26,4 +26,3 @@ def answer_create(question_id: int,
     answer_crud.create_answer(db, question=question,
                               answer_create=_answer_create,
                               user=current_user)
-    
