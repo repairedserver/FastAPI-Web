@@ -36,3 +36,7 @@ class QuestionList(BaseModel):
 
 class QuestionUpdate(QuestionCreate):
     question_id: int
+
+
+class QuestionDelete(BaseModel):
+    question_id: int
