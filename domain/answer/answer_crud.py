@@ -13,3 +13,7 @@ def create_answer(db: Session, question: Question, answer_create: AnswerCreate, 
                        user=user)
     db.add(db_answer)
     db.commit()
+
+
+def get_answer(db: Session, answer_id: int):
+    return db.query(Answer).get(answer_id)
