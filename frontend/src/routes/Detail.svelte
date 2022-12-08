@@ -1,8 +1,8 @@
 <script>
     import fastapi from "../lib/api"
     import Error from "../components/Error.svelte"
-    import { push } from 'svelte-spa-router'
-    import { is_login } from "../lib/store"
+    import { link, push } from 'svelte-spa-router'
+    import { is_login, username } from "../lib/store"
     import moment from 'moment/min/moment-with-locales'
     moment.locale('ko')
 
@@ -66,6 +66,12 @@
                 <div class="badge bg-light text-dark p-2">
                     {moment(question.create_date).format("YYYY년 MM월 DD일 hh:mm a")}
                 </div>
+            </div>
+            <div class="my-3">
+                {#if question.user && $username === question.user.username }
+                <a use:link href="/question-modify/{question.id}" 
+                    class="btn btn-sm btn-outline-secondary">수정</a>
+                {/if}
             </div>
         </div>
     </div>
