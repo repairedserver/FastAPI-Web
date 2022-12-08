@@ -37,6 +37,22 @@
             }
         )
     }
+    function delete_question(_question_id) {
+        if(window.confirm('정말로 삭제하시겠습니까?')) {
+            let url = "/api/question/delete"
+            let params = {
+                question_id: _question_id
+            }
+            fastapi('delete', url, params, 
+                (json) => {
+                    push('/')
+                },
+                (err_json) => {
+                    error = err_json
+                }
+            )
+        }
+    }
 </script>
 
 <div class="container my-3">
@@ -71,6 +87,8 @@
                 {#if question.user && $username === question.user.username }
                 <a use:link href="/question-modify/{question.id}" 
                     class="btn btn-sm btn-outline-secondary">수정</a>
+                <button class="btn btn-sm btn-outline-secondary"
+                    on:click={() => delete_question(question.id)}>삭제</button>
                 {/if}
             </div>
         </div>
