@@ -1,7 +1,14 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
 from database import Base
+
+question_voter = Table(
+    'question_voter',
+    Base.metadata,
+    Column('user_id', Integer, ForeignKey('user.id'), primary_key=True),
+    Column('question_id', Integer, ForeignKey('question.id'), primary_key=True)
+)
 
 
 class User(Base):
@@ -22,6 +29,7 @@ class Question(Base):
     user_id = Column(Integer, ForeignKey("user.id"), nullable=True)
     user = relationship("User", backref="answer_users")
     modify_date = Column(DateTime, nullable=True)
+    voter = relationship('User', secondary=question_voter, backref='question_voters')
 
 
 class Answer(Base):
