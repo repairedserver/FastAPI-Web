@@ -39,6 +39,7 @@ class Question(Base):
     voter = relationship('User', secondary=question_voter, backref='question_voters')
 
 
+
 class Answer(Base):
     __tablename__ = "answer"
 
