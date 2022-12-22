@@ -21,6 +21,7 @@ class Answer(BaseModel):
     user: User | None
     question_id: int
     modify_date: datetime.datetime | None = None
+    voter: list[User] = []
 
     class Config:
         orm_mode = True
