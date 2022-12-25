@@ -8,12 +8,14 @@
     let question_list = []
     let size = 10
     let total = 0
+    let kw = ''
     $: total_page = Math.ceil(total/size)
 
     function get_question_list(_page) {
         let params = {
             page: _page,
             size: size,
+            keyword: kw,
         }
         fastapi('get', '/api/question/list', params, (json) => {
             question_list = json.question_list
@@ -26,6 +28,20 @@
 </script>
 
 <div class="container my-3">
+    <div class="row my-3">
+        <div class="col-6">
+            <a use:link href="/question-create" 
+                class="btn btn-primary {$is_login ? '' : 'disabled'}">질문 등록하기</a>
+        </div>
+        <div class="col-6">
+            <div class="input-group">
+                <input type="text" class="form-control" bind:value="{kw}">
+                <button class="btn btn-outline-secondary" on:click={() => get_question_list(0)}>
+                    찾기
+                </button>
+            </div>
+        </div>
+    </div>
     <table class="table">
         <thead>
         <tr class="text-center table-dark">
@@ -71,5 +87,4 @@
         </li>
     </ul>
     <!-- 페이징처리 끝 -->
-    <a use:link href="/question-create" class="btn btn-primary{$is_login ? '' : 'disabled'}">질문 등록하기</a>
 </div>
